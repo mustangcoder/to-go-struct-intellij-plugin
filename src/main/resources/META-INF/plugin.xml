@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>to-go-struct</id>
     <name>Convert JSON/SQL to GO Struct</name>
-    <vendor email="github.haoliu@gmail.com" >Hao Liu</vendor>
+    <vendor email="1498162886@qq.com" >庐山升龙爸</vendor>
 
     <description><![CDATA[
         <p>Convert JSON or SQL create table to Go Struct.</p>
@@ -14,6 +14,10 @@
         <p>Enjoy！</p>
 
         <h2>Repo</h2>
+        <p> <a href="https://github.com/mustangcoder/to-go-struct-intellij-plugin">to-go-struct-intellij-plugin</a></p>
+        <p>&nbsp;</p>
+
+        <h2>fork from repo</h2>
         <p> <a href="https://github.com/liuhao2050/to-go-struct-intellij-plugin">to-go-struct-intellij-plugin</a></p>
         <p>&nbsp;</p>
     ]]></description>
