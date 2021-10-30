@@ -4,7 +4,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
 }
 
-group 'to-go=struct'
+group 'sql-json-to-go-struct'
 version '1.0.8'
 sourceCompatibility = 1.8
 

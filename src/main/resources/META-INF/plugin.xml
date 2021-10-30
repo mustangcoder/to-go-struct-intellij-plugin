@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>to-go-struct</id>
+    <id>sql-json-to-go-struct</id>
     <name>Convert JSON/SQL to GO Struct</name>
     <vendor email="1498162886@qq.com" >庐山升龙爸</vendor>
 
