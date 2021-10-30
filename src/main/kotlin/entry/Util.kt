@@ -1,5 +1,8 @@
 package entry
 
+import TextCopyForm
+import com.google.common.base.CaseFormat
+
 fun String.underscoreToCamel(): String {
     val names = this.split("_")
     val sb = StringBuilder()
@@ -31,7 +34,54 @@ fun String.makeTags(tpl: String): String {
     if (tpl.isEmpty()) {
         return ""
     }
-    return "    `" + tpl.replace("%s", this) + "`"
+
+    var tagList = tpl.split(";")
+    var result = ""
+    for (tag in tagList) {
+        var realVal = ""
+        if (tag.contains(TextCopyForm.CAMEL_CASE)) {
+            // 转驼峰
+            if (this.matches(Regex(".*[A-Z].*")) && !this.contains("_")) {
+                realVal = CaseFormat.LOWER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(this).toString()
+                realVal = CaseFormat.LOWER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL).convert(realVal).toString()
+            } else if (!this.matches(Regex(".*[A-Z].*")) && this.contains("_")) {
+                realVal = CaseFormat.LOWER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL).convert(this).toString()
+            } else {
+                realVal = this
+            }
+        } else if (tag.contains(TextCopyForm.UNDER_SCORE)) {
+            // 转下划线
+            if (this.matches(Regex(".*[A-Z].*")) && !this.contains("_")) {
+                realVal = CaseFormat.LOWER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(this).toString()
+            } else if (!this.matches(Regex(".*[A-Z].*")) && this.contains("_")) {
+                realVal = CaseFormat.LOWER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL).convert(this).toString()
+                realVal = CaseFormat.LOWER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(realVal).toString()
+            } else {
+                realVal = this
+            }
+        } else {
+            realVal = this
+        }
+        result = result + tag.replace("%s", realVal)
+            .replace(" " + TextCopyForm.CAMEL_CASE, "")
+            .replace(" " + TextCopyForm.UNDER_SCORE, "") +
+                " "
+    }
+
+    return "    `" + result + "`"
+}
+
+fun convertToCamelCase(columnName: String): String {
+    var itemList = columnName.toLowerCase().split("_")
+    var newColumnName = ""
+    for (i in itemList.indices) {
+        if (i == 0) {
+            newColumnName = newColumnName + itemList[i]
+            continue
+        }
+        newColumnName = newColumnName + itemList[i].get(0).toUpperCase() + itemList[i].substring(1)
+    }
+    return newColumnName
 }
 
 fun String.makeDaoFunc(): String {

@@ -14,6 +14,8 @@ import java.awt.datatransfer.StringSelection;
 public class TextCopyForm extends DialogWrapper {
 
 
+    public static final String CAMEL_CASE = "CAMEL_CASE";
+    public static final String UNDER_SCORE = "UNDER_SCORE";
     private JPanel panel1;
     private JTextArea t1TextArea;
     private JTextArea t2TextArea;
@@ -22,8 +24,8 @@ public class TextCopyForm extends DialogWrapper {
     private JCheckBox withCRUDCheckBox;
 
     private Builder builder;
-    private String tagTplKey = "go-tag-tpl";
-    private String defaultTag = "json:\"%s\" gorm:\"column:%s\"";
+    private final String tagTplKey = "go-tag-tpl";
+    private final String defaultTag = "json:\"%s " + CAMEL_CASE + "\";gorm:\"column:%s " + UNDER_SCORE + "\"";
 
     protected TextCopyForm(@Nullable Project project) {
         super(project, null, false, IdeModalityType.IDE, false);
